@@ -772,7 +772,7 @@ textarea.form-control.is-invalid {
 
 .bg-smoke .slick-arrow {
   background-color: var(--white-color);
-  border-color: transparent;
+  
 }
 .bg-smoke .slick-arrow:hover {
   background-color: var(--theme-color);
@@ -7306,7 +7306,7 @@ ul.comment-list .vs-comment:last-child:not(.children .vs-comment) > .vs-post-com
   left: 58px;
 }
 .shape-slider-area .arrow-right {
-  top: 57%;
+  top: 50%;
   right: 64px;
 }
 
@@ -7614,7 +7614,7 @@ ul.comment-list .vs-comment:last-child:not(.children .vs-comment) > .vs-post-com
   }
   .shape-slider-area .arrow-left,
   .shape-slider-area .arrow-right {
-    top: 45%;
+    top: 50%;
   }
   .shape-slider-area .arrow-right {
     top: 50%;
