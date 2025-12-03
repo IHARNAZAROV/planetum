@@ -4117,9 +4117,7 @@ ul.popular-service-wrap li:hover {
   background-color: var(--secondary-color);
   color: var(--white-color);
 }
-.footer-layout3 .footer-copyright {
-  background-color: #232323;
-}
+
 .footer-layout3 .copyright {
   color: var(--white-color);
 }
