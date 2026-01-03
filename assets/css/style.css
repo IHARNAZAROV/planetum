@@ -4422,9 +4422,7 @@ ul.popular-service-wrap li:hover {
     display: none !important;
   }
 }
-.blog-section-two .ms-auto {
-  /* Medium devices */
-}
+
 @media (max-width: 991px) {
   .blog-section-two .ms-auto {
     margin: 0 auto !important;
@@ -10977,3 +10975,19 @@ ul.comment-list .vs-comment:last-child:not(.children .vs-comment) > .vs-post-com
 }
 
 
+.feature-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  text-align: left; /* ВАЖНО */
+}
+
+.feature-item img {
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+}
+
+.feature-item span {
+  line-height: 1.3;
+}
