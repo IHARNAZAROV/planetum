@@ -10994,3 +10994,52 @@ ul.comment-list .vs-comment:last-child:not(.children .vs-comment) > .vs-post-com
 .feature-item span {
   line-height: 1.3;
 }
+
+.service-section ul {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+.service-section ul li {
+  list-style: none;
+}
+.hero-left-text {
+  position: absolute;
+  left: 5%;
+  top: 50%;
+  transform: translateY(-50%);
+  max-width: 480px;
+  z-index: 3;
+  color: #0a2540;
+}
+
+.hero-left-subtitle {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 12px;
+  opacity: 0.85;
+}
+
+.hero-left-title {
+  font-size: 42px;
+  line-height: 1.15;
+  margin-bottom: 20px;
+}
+
+.hero-left-description {
+  font-size: 16px;
+  margin-bottom: 28px;
+  opacity: 0.9;
+}
+
+/* ❗ ТОЛЬКО ПЕРВЫЙ СЛАЙД */
+.vs-hero-inner:not(.is-first-slide) .hero-left-text {
+  display: none;
+}
+
+@media (max-width: 991px) {
+  .hero-left-text {
+    display: none !important;
+  }
+}
