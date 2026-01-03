@@ -17,9 +17,23 @@
       content="width=device-width, initial-scale=1, shrink-to-fit=no"
     />
 
-    <!-- Favicons - Place favicon.ico in the root directory -->
-    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
-    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="192x192"
+      href="/android-chrome-192x192.png"
+    />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <!-- Цвет темы для мобильных браузеров -->
+    <meta name="theme-color" content="#ffffff" />
 
     <!--==============================
 	    All CSS File
@@ -1015,9 +1029,6 @@
     </div>
     <!--======== / counter Section ========-->
 
-
-
-
     <!--======== Why Section simple ========-->
     <section class="why-section-two space pt-0">
       <div class="container">
@@ -1220,17 +1231,17 @@
       <div class="container">
         <div class="title-area text-center wow fadeInUp" data-wow-delay="0.1s">
           <span class="sub-title">Следите за нашими открытиями</span>
-         <h2 class="sec-title">
-  Откройте мир ПланетУм в
-  <a
-    href="https://www.instagram.com/planetum_lida"
-    target="_blank"
-    rel="noopener noreferrer"
-    class="instagram-link"
-  >
-    Instagram
-  </a>
-</h2>
+          <h2 class="sec-title">
+            Откройте мир ПланетУм в
+            <a
+              href="https://www.instagram.com/planetum_lida"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="instagram-link"
+            >
+              Instagram
+            </a>
+          </h2>
         </div>
         <div class="row vs-carousel" data-slide-show="6" data-arrows="false">
           <div class="col-auto">
@@ -1350,58 +1361,208 @@
     </section>
     <!--======== / Gallery Section ========-->
 
-
- <!--======== About Section ========-->
+    <!--======== About Section ========-->
     <section class="about-section about-layout1 space">
-        <div class="container">
-            <div class="row gy-30 align-items-center">
-                <div class="col-lg-6 wow fadeInRight mt-0" data-wow-delay="0.1s">
-                    <div class="about-img">
-                        <img src="assets/img/bg/about-bg.png" alt="about-img">
-                    </div>
-                </div>
-                <div class="col-lg-6 wow fadeInLeft" data-wow-delay="0.1s">
-                    <span class="sub-title">Еще немного о нас</span>
-                    <h2 class="sec-title big-title">Почему родителям стоит выбрать именно нас</h2>
-                    <p class="fs-md mb-30">Если вы ищете место, где с вашим ребёнком будут работать не просто «преподаватели», а команда экспертов, понимающих, как устроено детское развитие на уровне мозга, эмоций и мотивации, — наша школа станет для вас тем самым пространством роста.</p>
-                    <p class="fs-md mb-30 ">Запишите ребёнка на пробное занятие и посмотрите, как обучение может стать естественной частью счастливого детства.</p>
-                    <div class="check-list1 mb-40">
-<div class="about-features">
-  <ul class="about-list">
-    <li class="feature-item">
-      <img src="assets/img/icon/about-icon1.svg" alt="">
-      <span>Качественное обучение</span>
-    </li>
-    <li class="feature-item">
-      <img src="assets/img/icon/about-icon2.svg" alt="">
-      <span>Безопасность и забота</span>
-    </li>
-  </ul>
-
-  <ul class="about-list">
-    <li class="feature-item">
-      <img src="assets/img/icon/about-icon3.svg" alt="">
-      <span>Обучение через игру</span>
-    </li>
-    <li class="feature-item">
-      <img src="assets/img/icon/about-icon4.svg" alt="">
-      <span>Домашняя атмосфера</span>
-    </li>
-  </ul>
-</div>
-                    </div>
-                    <a  href="https://t.me/+375299023630"
-                    target="_blank"
-                    rel="noopener noreferrer" class="vs-btn wave-btn style-1">Связаться через Telegram</a>
-                </div>
+      <div class="container">
+        <div class="row gy-30 align-items-center">
+          <div class="col-lg-6 wow fadeInRight mt-0" data-wow-delay="0.1s">
+            <div class="about-img">
+              <img src="assets/img/bg/about-bg.png" alt="about-img" />
             </div>
+          </div>
+          <div class="col-lg-6 wow fadeInLeft" data-wow-delay="0.1s">
+            <span class="sub-title">Еще немного о нас</span>
+            <h2 class="sec-title big-title">
+              Почему родителям стоит выбрать именно нас
+            </h2>
+            <p class="fs-md mb-30">
+              Если вы ищете место, где с вашим ребёнком будут работать не просто
+              «преподаватели», а команда экспертов, понимающих, как устроено
+              детское развитие на уровне мозга, эмоций и мотивации, — наша школа
+              станет для вас тем самым пространством роста.
+            </p>
+            <p class="fs-md mb-30">
+              Запишите ребёнка на пробное занятие и посмотрите, как обучение
+              может стать естественной частью счастливого детства.
+            </p>
+            <div class="check-list1 mb-40">
+              <div class="about-features">
+                <ul class="about-list">
+                  <li class="feature-item">
+                    <img src="assets/img/icon/about-icon1.svg" alt="" />
+                    <span>Качественное обучение</span>
+                  </li>
+                  <li class="feature-item">
+                    <img src="assets/img/icon/about-icon2.svg" alt="" />
+                    <span>Безопасность и забота</span>
+                  </li>
+                </ul>
+
+                <ul class="about-list">
+                  <li class="feature-item">
+                    <img src="assets/img/icon/about-icon3.svg" alt="" />
+                    <span>Обучение через игру</span>
+                  </li>
+                  <li class="feature-item">
+                    <img src="assets/img/icon/about-icon4.svg" alt="" />
+                    <span>Домашняя атмосфера</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <a
+              href="https://t.me/+375299023630"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="vs-btn wave-btn style-1"
+              >Связаться через Telegram</a
+            >
+          </div>
         </div>
-        <div class="shape-mockup movingX d-none d-hd-block" data-top="20%" data-left="25%"><img src="assets/img/icon/note-2.png" alt="shapes"></div>
-        <div class="shape-mockup moving d-none d-hd-block" data-bottom="5%" data-left="32%"><img src="assets/img/icon/ballon.png" alt="shapes"></div>
-        <div class="shape-mockup movingX d-none d-hd-block" data-top="20%" data-left="45%"><img src="assets/img/icon/light.png" alt="shapes"></div>
-        <div class="shape-mockup movingX d-none d-hd-block" data-ani-delay="4s" data-bottom="20%" data-right="5%"><img src="assets/img/icon/car-6.png" alt="shapes"></div>
+      </div>
+      <div
+        class="shape-mockup movingX d-none d-hd-block"
+        data-top="20%"
+        data-left="25%"
+      >
+        <img src="assets/img/icon/note-2.png" alt="shapes" />
+      </div>
+      <div
+        class="shape-mockup moving d-none d-hd-block"
+        data-bottom="5%"
+        data-left="32%"
+      >
+        <img src="assets/img/icon/ballon.png" alt="shapes" />
+      </div>
+      <div
+        class="shape-mockup movingX d-none d-hd-block"
+        data-top="20%"
+        data-left="45%"
+      >
+        <img src="assets/img/icon/light.png" alt="shapes" />
+      </div>
+      <div
+        class="shape-mockup movingX d-none d-hd-block"
+        data-ani-delay="4s"
+        data-bottom="20%"
+        data-right="5%"
+      >
+        <img src="assets/img/icon/car-6.png" alt="shapes" />
+      </div>
     </section>
     <!--======== / About Section ========-->
+
+    <!--======== Question Section ========-->
+    <section
+      class="testimonial-section space-top-shape2-plus space-bottom-shape-plus"
+    >
+      <div class="container">
+        <div class="row gy-30 align-items-center">
+          <div class="col-lg-4 wow fadeInLeft" data-wow-delay="0.1s">
+            <div class="text-center text-lg-start">
+              <span class="sub-title">Часто задаваемые вопросы</span>
+              <h2 class="sec-title">Вопросы, которые волнуют родителей</h2>
+              <p class="mb-30">
+                Мы собрали здесь ответы на самые важные и волнительные вопросы
+                родителей. Эти вопросы и ответы помогут лучше понять, как
+                проходят занятия, чему мы уделяем особое внимание и почему детям
+                у нас действительно комфортно. А если ответа на ваш вопрос здесь
+                не оказалось — мы всегда готовы пообщаться лично.
+              </p>
+              <a
+                href="https://t.me/+375299023630"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="vs-btn wave-btn style-1"
+                >Написать нам в Telegram</a
+              >
+            </div>
+          </div>
+          <div class="col-lg-8 wow fadeInRight" data-wow-delay="0.1s">
+            <div class="testi-slider-area">
+              <div
+                class="row testi-slider vs-carousel"
+                id="testi1"
+                data-slide-show="2"
+              >
+                <!-- Single Item -->
+                <div class="col-md-6">
+                  <div class="testi-box">
+                    <h4 class="testi-title">
+                      С какого возраста можно заниматься в центре?
+                    </h4>
+                    <p class="testi-text">
+                      Мы работаем с детьми разных возрастов. Программы
+                      подбираются с учётом этапов развития ребёнка, его
+                      интересов и готовности к занятиям. Такой подход помогает
+                      ребёнку чувствовать себя уверенно и комфортно с первых
+                      посещений.
+                    </p>
+                  </div>
+                </div>
+                <!-- Single Item -->
+                <div class="col-md-6">
+                  <div class="testi-box">
+                    <h4 class="testi-title">Как проходят занятия?</h4>
+                    <p class="testi-text">
+                      Занятия проходят в небольших группах или индивидуально, в
+                      спокойной и доброжелательной атмосфере. Мы используем
+                      игровые методики, чтобы обучение было интересным,
+                      естественным и без давления. Ребёнок вовлекается в процесс
+                      через любопытство и положительные эмоции.
+                    </p>
+                  </div>
+                </div>
+                <!-- Single Item -->
+                <div class="col-md-6">
+                  <div class="testi-box">
+                    <h4 class="testi-title">
+                      Нужно ли готовить ребёнка заранее?
+                    </h4>
+                    <p class="testi-text">
+                      Специальной подготовки не требуется. Все занятия выстроены
+                      так, чтобы ребёнок постепенно включался в процесс,
+                      чувствовал себя уверенно и комфортно с первых встреч. Мы
+                      внимательно следим за темпом адаптации каждого ребёнка.
+                    </p>
+                  </div>
+                </div>
+                <!-- Single Item -->
+                <div class="col-md-6">
+                  <div class="testi-box">
+                    <h4 class="testi-title">
+                      Можно ли прийти на первое занятие и посмотреть?
+                    </h4>
+                    <p class="testi-text">
+                      Да, конечно. Вы можете задать любые вопросы, познакомиться
+                      с педагогами и атмосферой центра. Это помогает родителям
+                      принять спокойное и осознанное решение о начале занятий.
+                      Мы всегда открыты к диалогу.
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <!-- / Slider End -->
+              <div class="vs-icon-box testi-1 d-none d-lg-block">
+                <button
+                  data-slick-prev="#testi1"
+                  class="icon-btn style-3 arrow-left mb-15"
+                >
+                  <i class="far fa-arrow-left"></i>
+                </button>
+                <button
+                  data-slick-next="#testi1"
+                  class="icon-btn style-3 arrow-right"
+                >
+                  <i class="far fa-arrow-right"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!--======== / Question Section ========-->
 
     <!--======== Team Section ========-->
     <section class="team-section bg-smoke space-top space-extra-bottom">
@@ -1769,8 +1930,8 @@
                 <h3 class="widget_title">Координаты ПланетУм</h3>
                 <div class="vs-widget-contact">
                   <p class="footer-info">
-                    <i class="fa-sharp-duotone fa-light fa-location-pen"></i>город Лида, бульвар
-                    Князя Гедимина, 12
+                    <i class="fa-sharp-duotone fa-light fa-location-pen"></i
+                    >город Лида, бульвар Князя Гедимина, 12
                   </p>
                   <p class="footer-info">
                     <i class="fas fa-envelope"></i
@@ -1783,20 +1944,25 @@
                     ><a href="tel:+375299023630">+375 29 902-36-30</a>
                   </p>
                   <p class="footer-info">
-                   <i class="fa-brands fa-yandex"></i><a                       href="https://yandex.by/maps/org/detskiy_razvivayushchiy_tsentr_planetum/212554798533"
+                    <i class="fa-brands fa-yandex"></i
+                    ><a
+                      href="https://yandex.by/maps/org/detskiy_razvivayushchiy_tsentr_planetum/212554798533"
                       target="_blank"
                       rel="noopener noreferrer"
                       style="color: inherit; text-decoration: none"
-                    >Мы на Яндекс Картах</a>
+                      >Мы на Яндекс Картах</a
+                    >
                   </p>
                   <p class="footer-info">
-                   <i class="fa-brands fa-google"></i><a                       href="https://maps.app.goo.gl/7H2TxgDtWtEGD59a7"
+                    <i class="fa-brands fa-google"></i
+                    ><a
+                      href="https://maps.app.goo.gl/7H2TxgDtWtEGD59a7"
                       target="_blank"
                       rel="noopener noreferrer"
                       style="color: inherit; text-decoration: none"
-                    >Мы на Гугл Картах</a>
+                      >Мы на Гугл Картах</a
+                    >
                   </p>
-
                 </div>
               </div>
             </div>
