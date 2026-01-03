@@ -30,8 +30,10 @@
 /*------------------- 1.5. Typography -------------------*/
 html,
 body {
+  
   scroll-behavior: auto !important;
   overflow-x: hidden;
+  
 }
 
 body {
@@ -1548,6 +1550,7 @@ textarea.form-control.is-invalid {
 
 section {
   position: relative;
+
 }
 
 .section-before {

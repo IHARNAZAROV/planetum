@@ -578,6 +578,25 @@ if ($(".parallax").length > 0) {
 };
 
 
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      e.preventDefault();
+
+      const targetId = this.getAttribute('href').substring(1);
+      const target = document.getElementById(targetId);
+      if (!target) return;
+
+      const headerOffset = 100; // высота sticky-хедера
+      const elementPosition = target.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth"
+      });
+    });
+  });
+
 
 /*----------- 19. Button Hover ----------*/
 var btnHover = $("<span class='btn-hover'><span class='btn-hover-inner'><span class='part part-1'></span><span class='part part-1'></span><span class='part part-1'></span><span class='part part-1'></span></span></span>");
