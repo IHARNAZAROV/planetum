@@ -1,69 +1,86 @@
 (function ($) {
   "use strict";
 
-  /* ==================================================
-   1. MOBILE MENU (jQuery plugin)
-  ================================================== */
-  $.fn.vsmobilemenu = function (options) {
-    const settings = $.extend({
-      menuToggleBtn: '.vs-menu-toggle',
-      bodyToggleClass: 'vs-body-visible',
-      subMenuClass: 'vs-submenu',
-      subMenuParent: 'vs-item-has-children',
-      subMenuParentToggle: 'vs-active',
-      expandClass: 'vs-mean-expand',
-      subMenuToggleClass: 'vs-open',
-      toggleSpeed: 400,
-    }, options);
+ $(function () {
 
-    return this.each(function () {
-      const $menu = $(this);
+    /* ==================================================
+      MOBILE MENU with inert (A11Y SAFE)
+    ================================================== */
 
-      // Toggle main menu visibility
-      function toggleMenu() {
-        $menu.toggleClass(settings.bodyToggleClass);
+    const menuSelector = '.vs-menu-wrapper';
+    const menuContentSelector = '.vs-mobile-menu';
+    const toggleBtnSelector = '.vs-menu-toggle';
+    const activeClass = 'vs-body-visible';
 
-        // Close all submenus
-        $menu.find('.' + settings.subMenuClass)
-          .removeClass(settings.subMenuToggleClass)
-          .slideUp(0)
-          .parent()
-          .removeClass(settings.subMenuParentToggle);
+    const $menu = $(menuSelector);
+    const $toggleBtn = $(toggleBtnSelector);
+
+    if (!$menu.length || !$toggleBtn.length) return;
+
+    /* ---------- INIT STATE ---------- */
+    // menu hidden by default
+    $menu.attr('inert', '');
+
+    /* ---------- OPEN MENU ---------- */
+    function openMenu() {
+      $menu
+        .addClass(activeClass)
+        .removeAttr('inert');
+
+      // lock body scroll
+      $('body').addClass('menu-open');
+
+      // focus first focusable element inside menu
+      const $focusable = $menu.find('a, button, input, textarea, select').filter(':visible').first();
+      if ($focusable.length) {
+        $focusable.trigger('focus');
       }
+    }
 
-      // Prepare submenu structure
-      $menu.find('li').each(function () {
-        const $submenu = $(this).children('ul');
-        if ($submenu.length) {
-          $submenu
-            .addClass(settings.subMenuClass)
-            .hide()
-            .parent()
-            .addClass(settings.subMenuParent)
-            .children('a')
-            .addClass(settings.expandClass);
-        }
-      });
+    /* ---------- CLOSE MENU ---------- */
+    function closeMenu() {
+      $menu
+        .removeClass(activeClass)
+        .attr('inert', '');
 
-      // Submenu toggle
-      $menu.on('click', '.' + settings.expandClass, function (e) {
-        e.preventDefault();
-        const $submenu = $(this).siblings('ul');
-        $(this).parent().toggleClass(settings.subMenuParentToggle);
-        $submenu.slideToggle(settings.toggleSpeed).toggleClass(settings.subMenuToggleClass);
-      });
+      $('body').removeClass('menu-open');
 
-      // Burger button
-      $(settings.menuToggleBtn).on('click', toggleMenu);
+      // return focus to burger button
+      $toggleBtn.trigger('focus');
+    }
 
-      // Close menu on outside click
-      $menu.on('click', toggleMenu);
-      $menu.children().on('click', e => e.stopPropagation());
+    /* ---------- TOGGLE BUTTON ---------- */
+    $toggleBtn.on('click', function (e) {
+      e.preventDefault();
+      e.stopImmediatePropagation();
+
+      if ($menu.hasClass(activeClass)) {
+        closeMenu();
+      } else {
+        openMenu();
+      }
     });
-  };
 
-  $('.vs-menu-wrapper').vsmobilemenu();
+    /* ---------- CLICK OUTSIDE (OVERLAY LOGIC) ---------- */
+    $menu.on('click', function (e) {
+      if (!$(e.target).closest(menuContentSelector).length) {
+        closeMenu();
+      }
+    });
 
+    /* ---------- PREVENT CLOSE INSIDE MENU ---------- */
+    $menu.find(menuContentSelector).on('click', function (e) {
+      e.stopPropagation();
+    });
+
+    /* ---------- ESC KEY ---------- */
+    $(document).on('keydown', function (e) {
+      if (e.key === 'Escape' && $menu.hasClass(activeClass)) {
+        closeMenu();
+      }
+    });
+
+  });
 
   /* ==================================================
    2. STICKY HEADER + SCROLL TO TOP
