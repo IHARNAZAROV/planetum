@@ -2228,6 +2228,7 @@ a.text-white:hover {
 
 .vs-animated {
   opacity: 1;
+  visibility: visible;
 }
 
 @keyframes slideinup {
@@ -11009,7 +11010,7 @@ ul.comment-list .vs-comment:last-child:not(.children .vs-comment) > .vs-post-com
   left: 5%;
   top: 50%;
   transform: translateY(-50%);
-  max-width: 480px;
+  max-width: 40%;
   z-index: 3;
   color: #0a2540;
 }
@@ -11025,12 +11026,15 @@ ul.comment-list .vs-comment:last-child:not(.children .vs-comment) > .vs-post-com
   font-size: 42px;
   line-height: 1.15;
   margin-bottom: 20px;
+
 }
 
 .hero-left-description {
-  font-size: 16px;
+  font-size: 26px;
   margin-bottom: 28px;
   opacity: 0.9;
+  color: var(--smoke-color);
+
 }
 
 /* ❗ ТОЛЬКО ПЕРВЫЙ СЛАЙД */
@@ -11038,8 +11042,51 @@ ul.comment-list .vs-comment:last-child:not(.children .vs-comment) > .vs-post-com
   display: none;
 }
 
+.hero-left-text {
+  opacity: 1;
+  visibility: visible;
+}
+
 @media (max-width: 991px) {
   .hero-left-text {
     display: none !important;
   }
+}
+
+[data-ani] {
+  opacity: 0;
+  visibility: hidden;
+}
+.vs-animated {
+  opacity: 1;
+  visibility: visible;
+}
+
+.sidemenu-wrapper {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 760px;
+  height: 100vh;
+  z-index: 9999;
+
+  transform: translateX(100%);
+  opacity: 0;
+  visibility: hidden;
+
+  transition:
+    transform 0.45s ease,
+    opacity 0.35s ease,
+    visibility 0s linear 0.45s;
+}
+
+/* открыто */
+.sidemenu-wrapper.show {
+  transform: translateX(0);
+  opacity: 1;
+  visibility: visible;
+
+  transition:
+    transform 0.45s ease,
+    opacity 0.35s ease;
 }
