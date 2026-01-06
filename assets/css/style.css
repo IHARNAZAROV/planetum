@@ -5552,7 +5552,7 @@ ul.comment-list .vs-comment:last-child:not(.children .vs-comment) > .vs-post-com
 }
 .hero-text span {
   font-weight: 600;
-  font-size: 24px;
+  font-size: 1.2rem;
   position: relative;
 }
 .hero-text i {
@@ -5808,7 +5808,7 @@ ul.comment-list .vs-comment:last-child:not(.children .vs-comment) > .vs-post-com
     margin-bottom: 20px;
   }
   .hero-title {
-    font-size: 32px;
+    font-size: 1.5rem;
     line-height: 1.6;
   }
   .hero-title .focus {
@@ -9364,7 +9364,7 @@ ul.comment-list .vs-comment:last-child:not(.children .vs-comment) > .vs-post-com
   color: var(--secondary-color);
 }
 .choose-btn.active {
-  color: var(--white-color);
+  color: var(--secondary-color);
 }
 
 .long-img {
@@ -11112,4 +11112,89 @@ body.menu-open {
 /* active */
 .vs-menu-wrapper.vs-body-visible {
   transform: translateX(0);
+}
+
+/* Базовый стиль для анимации появления (замена WOW) */
+.wow.reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    will-change: opacity, transform;
+}
+
+/* Когда элемент попадает в область видимости */
+.wow.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Специальные эффекты (опционально, если используются разные классы в HTML) */
+.wow.fadeInLeft.reveal { transform: translateX(-50px); }
+.wow.fadeInRight.reveal { transform: translateX(50px); }
+.wow.fadeInLeft.reveal.active, 
+.wow.fadeInRight.reveal.active { transform: translateX(0); }
+
+/* Исправление для мобильного меню (чтобы работало с нашим JS) */
+.vs-menu-wrapper.show, .sidemenu-wrapper.show {
+    display: block !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+/* Блокировка скролла при открытом меню */
+body.menu-open {
+    overflow: hidden !important;
+}
+
+/* Стили для нашей нативной анимации WOW */
+.wow.reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s ease-out;
+}
+.wow.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* --- ОБЩИЕ НАСТРОЙКИ ОБЕРТКИ (Оверлей) --- */
+.vs-menu-wrapper, 
+.sidemenu-wrapper {
+    display: block !important; /* Всегда блок, чтобы работала анимация */
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.4s ease, visibility 0.4s ease;
+    z-index: 9999;
+}
+
+/* Состояние, когда меню открыто */
+.vs-menu-wrapper.vs-body-visible, 
+.sidemenu-wrapper.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* --- МОБИЛЬНОЕ МЕНЮ (Выезд слева) --- */
+.vs-mobile-menu {
+    transform: translateX(-100%); /* Прячем за левый край */
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.vs-menu-wrapper.vs-body-visible .vs-mobile-menu {
+    transform: translateX(0); /* Выезжаем */
+}
+
+/* --- БОКОВОЕ МЕНЮ (Выезд справа) --- */
+.sidemenu-content {
+    transform: translateX(100%); /* Прячем за правый край */
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.sidemenu-wrapper.show .sidemenu-content {
+    transform: translateX(0); /* Выезжаем */
+}
+
+/* Блокировка скролла страницы */
+body.menu-open {
+    overflow: hidden !important;
 }
