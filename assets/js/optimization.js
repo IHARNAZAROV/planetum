@@ -18,7 +18,6 @@ document.addEventListener('DOMContentLoaded', () => {
             };
             requestAnimationFrame(step);
         };
-
         const counterObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -67,41 +66,223 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     };
 
-    // --- 4. ПЛАВНЫЙ СКРОЛЛ (ИСПРАВЛЕННЫЙ) ---
+    // --- 4. ПЛАВНЫЙ СКРОЛЛ И КНОПКА "НАВЕРХ" ---
     const initSmoothScroll = () => {
+        // Логика для якорных ссылок
         const headerOffset = 90; 
-
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 const href = this.getAttribute('href');
                 if (href === '#' || href === '' || this.classList.contains('vs-menu-toggle')) return;
-
                 const target = document.querySelector(href);
                 if (target) {
                     e.preventDefault();
-
-                    // Закрываем все меню перед скроллом
                     document.querySelectorAll('.vs-menu-wrapper, .sidemenu-wrapper').forEach(menu => {
                         menu.classList.remove('vs-body-visible', 'show');
                         menu.setAttribute('inert', '');
                     });
                     document.body.classList.remove('menu-open');
-
-                    // Выполняем скролл
                     const elementPosition = target.getBoundingClientRect().top;
                     const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-
-                    window.scrollTo({
-                        top: offsetPosition,
-                        behavior: 'smooth'
-                    });
+                    window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
                 }
             });
         });
+
+        // **НОВОЕ:** Логика для кнопки "Наверх"
+        document.querySelectorAll('.scrollToTop').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        });
+    };
+    
+    // --- 5. ПОЗИЦИОНИРОВАНИЕ ДЕКОРАТИВНЫХ ЭЛЕМЕНТОВ ---
+    const initShapeMockup = () => {
+        document.querySelectorAll('.shape-mockup').forEach(element => {
+            const dataset = element.dataset;
+            if (dataset.top)    element.style.top    = !isNaN(dataset.top)    ? dataset.top + 'px' : dataset.top;
+            if (dataset.right)  element.style.right  = !isNaN(dataset.right)  ? dataset.right + 'px' : dataset.right;
+            if (dataset.bottom) element.style.bottom = !isNaN(dataset.bottom) ? dataset.bottom + 'px' : dataset.bottom;
+            if (dataset.left)   element.style.left   = !isNaN(dataset.left)   ? dataset.left + 'px' : dataset.left;
+            element.removeAttribute('data-top');
+            element.removeAttribute('data-right');
+            element.removeAttribute('data-bottom');
+            element.removeAttribute('data-left');
+            if (element.parentElement) {
+                element.parentElement.classList.add('shape-mockup-wrap');
+            }
+        });
     };
 
+    // **НОВОЕ:** --- 6. ФОНЫ И МАСКИ ИЗ DATA-АТРИБУТОВ ---
+    const initDataAttributes = () => {
+        document.querySelectorAll('[data-bg-src]').forEach(el => {
+            el.style.backgroundImage = `url(${el.dataset.bgSrc})`;
+            el.removeAttribute('data-bg-src');
+        });
+        document.querySelectorAll('[data-mask-src]').forEach(el => {
+            const maskUrl = `url(${el.dataset.maskSrc})`;
+            el.style.maskImage = maskUrl;
+            el.style.webkitMaskImage = maskUrl;
+            el.removeAttribute('data-mask-src');
+        });
+    };
+
+    /*----------- Throttling Helper (Explicit Global) -----------*/
+    window.throttle = function(func, limit) {
+      let inThrottle;
+      return function() {
+        const args = arguments;
+        const context = this;
+        if (!inThrottle) {
+          func.apply(context, args);
+          inThrottle = true;
+          setTimeout(() => inThrottle = false, limit);
+        }
+      }
+    };
+    
+    // --- 7. СИСТЕМА МЕНЮ (Mobile & Side Menu) ---
+    const initMenuSystem = () => {
+        const menuConfigs = [
+            {
+                trigger: '.vs-menu-toggle',
+                drawer: '.vs-menu-wrapper',
+                content: '.vs-mobile-menu',
+                activeClass: 'vs-body-visible'
+            },
+            {
+                trigger: '.sideMenuToggler',
+                drawer: '.sidemenu-wrapper',
+                content: '.sidemenu-content',
+                activeClass: 'show'
+            }
+        ];
+
+        const openDrawer = (config) => {
+            const drawer = document.querySelector(config.drawer);
+            if (!drawer) return;
+            drawer.classList.add(config.activeClass);
+            drawer.removeAttribute('inert');
+            document.body.classList.add('menu-open');
+        };
+
+        const closeDrawer = (config) => {
+            const drawer = document.querySelector(config.drawer);
+            if (!drawer) return;
+            drawer.classList.remove(config.activeClass);
+            drawer.setAttribute('inert', '');
+            // Проверяем, открыты ли другие меню, прежде чем убирать класс с body
+            if (!document.querySelector('.vs-body-visible, .sidemenu-wrapper.show')) {
+                document.body.classList.remove('menu-open');
+            }
+        };
+
+        // Устанавливаем начальное состояние `inert` для доступности
+        menuConfigs.forEach(config => {
+            const drawer = document.querySelector(config.drawer);
+            if (drawer) drawer.setAttribute('inert', '');
+        });
+
+        // Единый обработчик кликов для открытия меню (делегирование)
+        document.body.addEventListener('click', (e) => {
+            const matchingConfig = menuConfigs.find(config => e.target.closest(config.trigger));
+            if (matchingConfig) {
+                e.preventDefault();
+                openDrawer(matchingConfig);
+            }
+        });
+
+        // Обработчики для закрытия меню (кнопки, клик мимо)
+        menuConfigs.forEach(config => {
+            const drawer = document.querySelector(config.drawer);
+            if (!drawer) return;
+
+            drawer.querySelectorAll('.closeButton, .sideMenuCls').forEach(closeBtn => {
+                closeBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    closeDrawer(config);
+                });
+            });
+
+            drawer.addEventListener('click', (e) => {
+                if (!e.target.closest(config.content)) {
+                    closeDrawer(config);
+                }
+            });
+        });
+
+        // Глобальный обработчик для клавиши Escape
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                menuConfigs.forEach(config => closeDrawer(config));
+            }
+        });
+    };
+
+        // --- 8. АНИМАЦИЯ КНОПОК (WAVE-BTN) ---
+    const initWaveButtons = () => {
+        const waveHtml = "<span class='btn-hover'><span class='btn-hover-inner'>" + "<span class='part'></span>".repeat(4) + "</span></span>";
+        
+        document.querySelectorAll('.wave-btn').forEach(button => {
+            button.insertAdjacentHTML('beforeend', waveHtml);
+        });
+    };
+
+
+        // --- 9. "ЛИПКАЯ" ШАПКА (STICKY HEADER) ---
+    const initStickyHeader = () => {
+        let lastScrollTop = 0;
+        const header = document.querySelector('.sticky-active');
+        const scrollTopButton = document.querySelector('.scrollToTop');
+
+        // Если на странице нет элемента шапки, то ничего не делаем.
+        if (!header) return;
+
+        const headerParent = header.parentElement;
+        if (!headerParent) return;
+
+        // Используем наш глобальный window.throttle
+        window.addEventListener('scroll', window.throttle(() => {
+            const scrollTop = window.scrollY;
+            const height = header.offsetHeight; // Нативный аналог .outerHeight()
+
+            // Задаем min-height родителю, чтобы избежать "прыжка" контента
+            headerParent.style.minHeight = height + 'px';
+
+            if (scrollTop > 800) {
+                headerParent.classList.add('will-sticky');
+                // Показываем/скрываем шапку в зависимости от направления скролла
+                header.classList.toggle('active', scrollTop < lastScrollTop);
+            } else {
+                headerParent.classList.remove('will-sticky');
+                headerParent.style.minHeight = ''; // Сбрасываем min-height
+                header.classList.remove('active');
+            }
+
+            // Обновляем позицию скролла для следующего события
+            lastScrollTop = scrollTop;
+
+            // Показываем/скрываем кнопку "Наверх"
+            if (scrollTopButton) {
+                scrollTopButton.classList.toggle('show', scrollTop > 500);
+            }
+        }, 150));
+    };
+
+    
+    // ==================================================
+    //              ЗАПУСК ВСЕХ ФУНКЦИЙ
+    // ==================================================
     initCounters();
     initScrollAnimations();
     initLightbox();
     initSmoothScroll();
+    initShapeMockup();
+    initDataAttributes(); 
+initMenuSystem();
+initWaveButtons();
+initStickyHeader();
 });
