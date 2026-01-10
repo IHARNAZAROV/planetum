@@ -9164,7 +9164,7 @@ ul.comment-list .vs-comment:last-child:not(.children .vs-comment) > .vs-post-com
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  right: -90px;
+  right: -55px;
   width: var(--icon-size);
 }
 .vs-icon-box.testi-2 {

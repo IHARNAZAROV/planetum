@@ -273,6 +273,15 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     
+var scene = document.querySelector('.parallax');
+
+if (scene) {
+  var parallax = new Parallax(scene, {
+    relativeInput: false,
+    hoverOnly: true,
+  });
+}
+
     // ==================================================
     //              ЗАПУСК ВСЕХ ФУНКЦИЙ
     // ==================================================
