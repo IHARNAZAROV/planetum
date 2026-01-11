@@ -1207,6 +1207,7 @@ textarea.form-control.is-invalid {
   background-color: var(--smoke-color);
   color: var(--theme-color);
   line-height: 1;
+  border: 1px solid var(--theme-color);
 }
 .icon-btn.style-3:hover {
   background-color: var(--theme-color);
@@ -10861,7 +10862,7 @@ ul.comment-list .vs-comment:last-child:not(.children .vs-comment) > .vs-post-com
 .footer-layout5 .footer-info {
   color: var(--white-color);
 }
-.footer-layout5 .footer-copyright .copyright {
+.footer-layout .footer-copyright .copyright {
   color: var(--white-color);
   border-top: 1px solid var(--white-color);
 }
@@ -11198,3 +11199,68 @@ body.menu-open {
 body.menu-open {
     overflow: hidden !important;
 }
+
+.social-link {
+  display: inline-block;
+}
+
+.social-icon {
+  width: 24px;
+  height: 24px;
+  display: block;
+
+  /* ОБЯЗАТЕЛЬНО */
+  transform: scale(1);
+
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  will-change: transform;
+}
+
+.social-link:hover .social-icon {
+  transform: scale(1.15);
+}
+
+.social-list {
+  display: flex;
+  align-items: center;
+
+  /* адаптивный отступ между иконками */
+  gap: clamp(12px, 2vw, 20px);
+
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.social-list .social-link {   width: 44px;
+  height: 44px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+  background-color: transparent;
+
+  overflow: hidden; /* 🔑 КЛЮЧ */
+  transition: background-color 0.25s ease;
+
+}
+
+.social-list.social-icon {
+  width: 22px;
+  height: 22px;
+
+  transform: scale(1);
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.social-list .social-link:hover {
+  background-color: #ffffff;
+}
+
+.social-link:hover .social-icon {
+   transform: scale(1.15);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+}
+.appointment-section { background-color: #ffffff}
