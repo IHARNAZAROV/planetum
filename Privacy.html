@@ -48,7 +48,6 @@
       rel="stylesheet"
     />
 
-
     <!-- CSS Files -->
     <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
     <link rel="stylesheet" href="assets/css/fontawesome.min.css" />
@@ -114,6 +113,19 @@
 
     <!--======== Header ========-->
     <header class="vs-header">
+      <!-- ===== Mobile Menu ===== -->
+      <div class="vs-menu-wrapper d-lg-none" inert>
+        <nav class="vs-mobile-menu" aria-label="Мобильная навигация">
+          <ul>
+            <li><a href="#service">Программы</a></li>
+            <li><a href="#about">О нас</a></li>
+            <li><a href="#faq">Вопросы</a></li>
+            <li><a href="#teachers">Преподаватели</a></li>
+            <li><a href="#contacts">Контакты</a></li>
+          </ul>
+        </nav>
+      </div>
+      <!-- ===== / Mobile Menu ===== -->
       <!--header-top-wrapper start-->
       <div class="header-top-area d-none d-lg-block">
         <div class="container">
@@ -130,8 +142,15 @@
                     ><a href="tel:+375445555895">+375 44 555-58-95</a>
                   </li>
                   <li>
-                    <i class="fal fa-map-marker-alt"></i>город Лида, бульвар
-                    Князя Гедимина, 12
+                    <a
+                      href="https://yandex.by/maps/org/detskiy_razvivayushchiy_tsentr_planetum/212554798533"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style="color: inherit; text-decoration: none"
+                    >
+                      <i class="fal fa-map-marker-alt"></i>
+                      город Лида, бульвар Князя Гедимина, 12
+                    </a>
                   </li>
                 </ul>
               </div>
@@ -143,15 +162,47 @@
                     <a
                       href="https://www.tiktok.com/@planetum_lida"
                       target="_blank"
-                      ><i class="fa-brands fa-tiktok"></i
-                    ></a>
+                      rel="noopener noreferrer"
+                      class="social-link"
+                      ><img
+                        class="social-icon"
+                        src="/assets/img/icons/tiktok.svg"
+                        alt="Instagram"
+                        width="24"
+                        height="24"
+                    /></a>
                   </li>
                   <li>
                     <a
                       href="https://www.instagram.com/planetum_lida"
                       target="_blank"
-                      ><i class="fa-brands fa-instagram"></i
-                    ></a>
+                      rel="noopener noreferrer"
+                      class="social-link"
+                      ><img
+                        class="social-icon"
+                        src="/assets/img/icons/instagram.svg"
+                        alt="Instagram"
+                        width="24"
+                        height="24"
+                      />
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="https://t.me/+375445555895"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="social-link"
+                      aria-label="Telegram"
+                    >
+                      <img
+                        class="social-icon"
+                        src="/assets/img/icons/telegram.svg"
+                        alt="Instagram"
+                        width="24"
+                        height="24"
+                      />
+                    </a>
                   </li>
                 </ul>
               </div>
@@ -176,9 +227,28 @@
                     </a>
                   </div>
                 </div>
+                <div class="col-auto">
+                  <button
+                    type="button"
+                    class="vs-menu-toggle d-block d-lg-none"
+                  >
+                    <i class="far fa-bars"></i> Меню
+                  </button>
+                </div>
                 <div class="col-auto d-none d-xl-block">
                   <div class="header-button">
-                    <button type="button" class="sideMenuToggler icon-btn">
+                    <a
+                      href="https://t.me/+375445555895"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="vs-btn wave-btn"
+                      >Задать вопрос</a
+                    >
+                    <button
+                      type="button"
+                      class="sideMenuToggler icon-btn"
+                      aria-label="Открыть боковое меню"
+                    >
                       <i class="fal fa-bars"></i>
                     </button>
                   </div>
@@ -369,17 +439,12 @@
                 </p>
               </div>
             </div>
- 
           </div>
-
         </div>
       </div>
     </section>
- 
 
-    <!--==============================
-	Footer Area
-	==============================-->
+    <!--==============================	Footer Area 	==============================-->
 
     <footer
       class="footer-wrapper footer-layout3"
@@ -408,17 +473,59 @@
                     собственную Вселенную
                   </p>
                   <div class="multi-social">
-                    <a
-                      href="https://www.instagram.com/planetum_lida"
-                      target="_blank"
-                      ><i class="fa-brands fa-instagram"></i
-                    ></a>
+                    <ul class="social-list">
+                      <li>
+                        <a
+                          href="https://www.tiktok.com/@planetum_lida"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          class="social-link"
+                        >
+                          <img
+                            class="social-icon"
+                            src="/assets/img/icons/tiktok.svg"
+                            alt="TikTok"
+                            width="24"
+                            height="24"
+                          />
+                        </a>
+                      </li>
 
-                    <a
-                      href="https://www.tiktok.com/@planetum_lida"
-                      target="_blank"
-                      ><i class="fa-brands fa-tiktok"></i
-                    ></a>
+                      <li>
+                        <a
+                          href="https://www.instagram.com/planetum_lida"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          class="social-link"
+                        >
+                          <img
+                            class="social-icon"
+                            src="/assets/img/icons/instagram.svg"
+                            alt="Instagram"
+                            width="24"
+                            height="24"
+                          />
+                        </a>
+                      </li>
+
+                      <li>
+                        <a
+                          href="https://t.me/+375445555895"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          class="social-link"
+                          aria-label="Telegram"
+                        >
+                          <img
+                            class="social-icon"
+                            src="/assets/img/icons/telegram.svg"
+                            alt="Telegram"
+                            width="24"
+                            height="24"
+                          />
+                        </a>
+                      </li>
+                    </ul>
                   </div>
                 </div>
               </div>
@@ -449,8 +556,8 @@
                 <h3 class="widget_title">Координаты ПланетУм</h3>
                 <div class="vs-widget-contact">
                   <p class="footer-info">
-                    <i class="fas fa-map-marker-alt"></i>город Лида, бульвар
-                    Князя Гедимина, 12
+                    <i class="fa-sharp-duotone fa-light fa-location-pen"></i
+                    >город Лида, бульвар Князя Гедимина, 12
                   </p>
                   <p class="footer-info">
                     <i class="fas fa-envelope"></i
@@ -540,10 +647,6 @@
         <img src="assets/img/icon/f-i-3-6.png" alt="shapes" />
       </div>
     </footer>
-
-    <!--********************************
-			Code End  Here 
-	******************************** -->
 
     <!-- Scroll To Top -->
     <a href="#" class="scrollToTop scroll-btn"
