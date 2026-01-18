@@ -460,10 +460,7 @@ input.form-control::-webkit-inner-spin-button {
   margin: 0;
 }
 
-/* Firefox */
-input.form-control[type=number] {
-  -moz-appearance: textfield;
-}
+
 
 textarea.form-control {
   min-height: 150px;
@@ -11269,3 +11266,9 @@ body.menu-open {
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
 }
 .appointment-section { background-color: #ffffff}
+
+
+.parallax [data-depth] {
+  transform: translate3d(var(--px, 0px), var(--py, 0px), 0);
+  will-change: transform;
+}
