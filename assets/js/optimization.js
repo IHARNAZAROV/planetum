@@ -489,14 +489,11 @@
   document.addEventListener("DOMContentLoaded", () => {
     initDataAttributes();
     initShapeMockup();
-
     initMenuSystem();
     initWaveButtons();
-
     initScrollAnimations();
     initLightbox();
     initSmoothScroll();
-
     initStickyHeader();
     initPremiumHeroParallax();
   });
