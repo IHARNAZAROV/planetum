@@ -19,32 +19,6 @@
     };
   }
 
-  // ==================================================
-  // UI: Scroll reveal animations (.wow)
-  // ==================================================
-  function initScrollAnimations() {
-    const elements = document.querySelectorAll(".wow");
-    if (!elements.length) return;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (!entry.isIntersecting) return;
-
-          const el = entry.target;
-          el.style.transitionDelay = el.getAttribute("data-wow-delay") || "0s";
-          el.classList.add("active");
-          observer.unobserve(el);
-        });
-      },
-      { threshold: 0.1 }
-    );
-
-    elements.forEach((el) => {
-      el.classList.add("reveal");
-      observer.observe(el);
-    });
-  }
 
   // ==================================================
   // UI: Lightbox for images (.popup-image)
@@ -461,27 +435,7 @@
     start();
   }
 
-  // ==================================================
-  // Slick (jQuery): slide animations
-  // ==================================================
-  function initSlickCarouselAnimations() {
-    if (!window.jQuery) return;
 
-    const $ = window.jQuery;
-
-    $(function () {
-      // initial animation on first slide
-      $(window).on("load", function () {
-        $(".vs-carousel .slick-slide").first().find("[data-ani]").addClass("vs-animated");
-      });
-
-      // animation on slide change
-      $(".vs-carousel").on("afterChange", function (event, slick, currentSlide) {
-        $(slick.$slides).find("[data-ani]").removeClass("vs-animated");
-        $(slick.$slides[currentSlide]).find("[data-ani]").addClass("vs-animated");
-      });
-    });
-  }
 
 
 
@@ -563,13 +517,11 @@
     initShapeMockup();
     initMenuSystem();
     initWaveButtons();
-    initScrollAnimations();
     initLightbox();
     initSmoothScroll();
     initStickyHeader();
     initPremiumHeroParallax();
   });
 
-  // jQuery part (Slick)
-  initSlickCarouselAnimations();
+
 })();
