@@ -437,6 +437,66 @@
 
 
 
+  (function () {
+  "use strict";
+
+  /*---------- Set Mask (нужно для data-mask-src в секции teachers) ----------*/
+  const maskNodes = document.querySelectorAll("[data-mask-src]");
+
+  if (maskNodes.length > 0) {
+    maskNodes.forEach((el) => {
+      const mask = el.getAttribute("data-mask-src");
+
+      if (mask) {
+        el.style.maskImage = `url(${mask})`;
+        el.style.webkitMaskImage = `url(${mask})`;
+      }
+
+      el.removeAttribute("data-mask-src");
+    });
+  }
+
+  /*---------- WOW Js (Scroll Animation) ----------*/
+  if (typeof WOW === "function") {
+    new WOW({
+      boxClass: "wow",
+      animateClass: "animate__animated",
+      offset: 0,
+      mobile: true,
+      live: true,
+    }).init();
+  }
+
+  /*---------- Shape Mockup (позиционирование декора) ----------*/
+  function shapeMockup(elements) {
+    elements.forEach((el) => {
+      const shapeTop = el.dataset.top;
+      const shapeRight = el.dataset.right;
+      const shapeBottom = el.dataset.bottom;
+      const shapeLeft = el.dataset.left;
+
+      if (shapeTop !== undefined) el.style.top = shapeTop;
+      if (shapeRight !== undefined) el.style.right = shapeRight;
+      if (shapeBottom !== undefined) el.style.bottom = shapeBottom;
+      if (shapeLeft !== undefined) el.style.left = shapeLeft;
+
+      el.removeAttribute("data-top");
+      el.removeAttribute("data-right");
+      el.removeAttribute("data-bottom");
+      el.removeAttribute("data-left");
+
+      const parent = el.parentElement;
+      if (parent) parent.classList.add("shape-mockup-wrap");
+    });
+  }
+
+  const shapeNodes = document.querySelectorAll(".shape-mockup");
+  if (shapeNodes.length > 0) {
+    shapeMockup(Array.from(shapeNodes));
+  }
+})();
+
+
 
 
  (function () {
