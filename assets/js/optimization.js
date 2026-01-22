@@ -483,6 +483,78 @@
     });
   }
 
+
+
+ (function () {
+    const menuWrapper = document.querySelector(".vs-menu-wrapper");
+    const menu = document.querySelector("#mobileMenu");
+    const toggleBtn = document.querySelector(".menu-toggle");
+    const closeBtn = menuWrapper ? menuWrapper.querySelector(".closeButton") : null;
+
+    if (!menuWrapper || !menu || !toggleBtn || !closeBtn) return;
+
+    let isOpen = false;
+    let lastFocusedElement = null;
+
+    function lockScroll(lock) {
+      document.documentElement.style.overflow = lock ? "hidden" : "";
+      document.body.style.overflow = lock ? "hidden" : "";
+    }
+
+    function openMenu() {
+      if (isOpen) return;
+      isOpen = true;
+
+      lastFocusedElement = document.activeElement;
+
+      menuWrapper.hidden = false;
+      menuWrapper.classList.add("is-open");
+      menuWrapper.removeAttribute("inert");
+
+      toggleBtn.setAttribute("aria-expanded", "true");
+      lockScroll(true);
+
+      closeBtn.focus();
+    }
+
+    function closeMenu() {
+      if (!isOpen) return;
+      isOpen = false;
+
+      menuWrapper.classList.remove("is-open");
+      menuWrapper.setAttribute("inert", "");
+
+      toggleBtn.setAttribute("aria-expanded", "false");
+      lockScroll(false);
+
+      setTimeout(() => {
+        menuWrapper.hidden = true;
+      }, 250);
+
+      if (lastFocusedElement && typeof lastFocusedElement.focus === "function") {
+        lastFocusedElement.focus();
+      }
+    }
+
+    function toggleMenu() {
+      isOpen ? closeMenu() : openMenu();
+    }
+
+    toggleBtn.addEventListener("click", toggleMenu);
+    closeBtn.addEventListener("click", closeMenu);
+
+    menu.addEventListener("click", (e) => {
+      const link = e.target.closest("a");
+      if (!link) return;
+      closeMenu();
+    });
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") closeMenu();
+    });
+  })();
+
+
   // ==================================================
   // Boot
   // ==================================================

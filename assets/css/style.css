@@ -15,9 +15,10 @@
   --error-color: #dc3545;
   --blue-color: #786acf;
   --border-color: rgb(238, 241, 242);
-  --title-font: "Baloo 2", cursive;
-  --para-font: "Catamaran", sans-serif;
-  --body-font: "Baloo 2", cursive;
+
+  --title-font: "Balsamiq Sans", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  --para-font: "Rubik", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  --body-font: "Rubik", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
   --icon-font: "Font Awesome 6 Pro";
   --main-container: 1220px;
   --container-gutters: 30px;
@@ -26,6 +27,7 @@
   --section-title-space: 60px;
   --ripple-ani-duration: 5s;
 }
+
 
 /*------------------- 1.5. Typography -------------------*/
 html,
@@ -987,7 +989,7 @@ textarea.form-control.is-invalid {
   font-size: 12px;
   border-radius: 50px;
   background-color: var(--smoke-color);
-  float: right;
+ 
 }
 .vs-mobile-menu ul .vs-item-has-children.vs-active > a .vs-mean-expand:before {
   content: "\f068";
@@ -11271,4 +11273,146 @@ body.menu-open {
 .parallax [data-depth] {
   transform: translate3d(var(--px, 0px), var(--py, 0px), 0);
   will-change: transform;
+}
+
+.vs-menu-wrapper {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: min(320px, 90vw);
+  height: 100vh;
+  z-index: 1001;
+  background: #fff;
+  transform: translateX(100%);
+  transition: transform 0.25s ease;
+  box-shadow: -12px 0 30px rgba(0, 0, 0, 0.12);
+  padding: 20px;
+}
+
+.vs-menu-wrapper.is-open {
+  transform: translateX(0);
+}
+
+/* чтобы absolute у closeButton работал правильно */
+.vs-menu-wrapper {
+  position: fixed;
+}
+
+/* ТВОЙ ЕДИНЫЙ СТИЛЬ КНОПКИ */
+.vs-menu-wrapper .closeButton {
+  display: inline-block;
+  border: none;
+  width: 40px;
+  height: 40px;
+  font-size: 18px;
+  line-height: 1;
+  padding: 0;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  color: var(--white-color);
+  background-color: var(--theme-color);
+  border-radius: 50%;
+  transform: rotate(0);
+  transition: all ease 0.4s;
+  cursor: pointer;
+}
+
+.vs-menu-wrapper .closeButton:hover {
+  color: var(--white-color);
+  background-color: var(--secondary-color);
+  transform: rotate(90deg);
+}
+
+.vs-mobile-menu ul {
+  list-style: none;
+  padding: 70px 0 0 0;
+  margin: 0;
+}
+
+.vs-mobile-menu a {
+  display: block;
+  padding: 12px 0;
+  text-decoration: none;
+  color: #111;
+}
+
+@media (max-width: 991.98px) {
+  .contact-form-box {
+    display: none !important;
+  }
+}
+
+
+
+.review-links {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+/* Кнопка-ссылка */
+.review-img-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 180px;          /* одинаковая ширина */
+  height: 92px;          /* одинаковая высота */
+  padding: 10px 14px;
+
+  border: 2px solid #131c5f;
+  border-radius: 14px;
+
+  background: #ffffff;
+  box-shadow: 0 10px 22px rgba(19, 28, 95, 0.18);
+
+  cursor: pointer;
+  text-decoration: none;
+  -webkit-tap-highlight-color: transparent;
+
+  transition:
+    transform 0.18s ease,
+    box-shadow 0.18s ease,
+    background-color 0.18s ease,
+    border-color 0.18s ease;
+}
+
+/* Hover */
+.review-img-link:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 28px rgba(19, 28, 95, 0.26);
+}
+
+/* Active */
+.review-img-link:active {
+  transform: translateY(0);
+  box-shadow: 0 6px 14px rgba(19, 28, 95, 0.22);
+  background-color: rgba(19, 28, 95, 0.04);
+}
+
+/* Focus */
+.review-img-link:focus {
+  outline: none;
+}
+
+.review-img-link:focus-visible {
+  outline: 3px solid rgba(19, 28, 95, 0.35);
+  outline-offset: 3px;
+  box-shadow: 0 14px 28px rgba(19, 28, 95, 0.26);
+}
+
+/* Картинка внутри кнопки */
+.review-img {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: 70px; /* можно уменьшить/увеличить */
+  display: block;
+
+  user-select: none;
+  -webkit-user-drag: none;
 }
