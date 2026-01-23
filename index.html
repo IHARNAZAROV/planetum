@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="ru" class="no-js">
+<html lang="ru">
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
@@ -108,86 +108,131 @@
 
     <!-- ===== Schema.org ===== -->
     <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@graph": [
-          {
-            "@type": "ChildCare",
-            "@id": "https://planetum.by/#childcare",
-            "name": "Planetum",
-            "url": "https://planetum.by",
-            "description": "Детский развивающий центр в Лиде. Подготовка к школе, развивающие занятия, каллиграфия, репетиторство, английский язык, мастер-классы.",
-            "telephone": "+375445555895",
-            "email": "planetum.lida@gmail.com",
-            "address": {
-              "@type": "PostalAddress",
-              "streetAddress": "бульвар Князя Гедимина, 12",
-              "addressLocality": "Лида",
-              "addressRegion": "Гродненская область",
-              "addressCountry": "BY"
-            },
-            "geo": {
-              "@type": "GeoCoordinates",
-              "latitude": 53.885517,
-              "longitude": 25.300224
-            },
-            "hasMap": "https://maps.app.goo.gl/7H2TxgDtWtEGD59a7",
-            "openingHoursSpecification": {
-              "@type": "OpeningHoursSpecification",
-              "dayOfWeek": [
-                "Monday",
-                "Tuesday",
-                "Wednesday",
-                "Thursday",
-                "Friday",
-                "Saturday",
-                "Sunday"
-              ],
-              "opens": "09:00",
-              "closes": "20:00"
-            },
-            "areaServed": {
-              "@type": "City",
-              "name": "Лида"
-            },
-            "priceRange": "$$",
-            "image": [
-              "https://planetum.by/favicon.ico"
-            ],
-            "logo": {
-              "@type": "ImageObject",
-              "@id": "https://planetum.by/#logo",
-              "url": "https://planetum.by/favicon.ico",
-              "contentUrl": "https://planetum.by/favicon.ico",
-              "caption": "Planetum"
-            }
-          },
-          {
-            "@type": "ItemList",
-            "@id": "https://planetum.by/#service",
-            "name": "Услуги детского развивающего центра Planetum",
-            "itemListOrder": "https://schema.org/ItemListOrderAscending",
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "ChildCare",
+      "@id": "https://planetum.by/#childcare",
+      "name": "Детский развивающий центр «ПланетУм»",
+      "alternateName": "Planetum",
+      "url": "https://planetum.by/",
+      "description": "Детский развивающий центр «ПланетУм» в Лиде — развивающие занятия, подготовка к школе, творчество, кружки и заботливая атмосфера для детей.",
+      "telephone": "+375445555895",
+      "email": "planetum.lida@gmail.com",
+      "priceRange": "$$",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "бульвар Князя Гедимина, 12",
+        "addressLocality": "Лида",
+        "addressRegion": "Гродненская область",
+        "postalCode": "231300",
+        "addressCountry": "BY"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 53.885517,
+        "longitude": 25.300224
+      },
+      "hasMap": "https://maps.app.goo.gl/7H2TxgDtWtEGD59a7",
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday"
+          ],
+          "opens": "09:00",
+          "closes": "20:00"
+        }
+      ],
+      "areaServed": {
+        "@type": "City",
+        "name": "Лида"
+      },
+      "image": [
+        "https://planetum.by/normal/logo.webp"
+      ],
+      "logo": {
+        "@type": "ImageObject",
+        "@id": "https://planetum.by/#logo",
+        "url": "https://planetum.by/normal/logo.webp",
+        "contentUrl": "https://planetum.by/normal/logo.webp",
+        "caption": "ПланетУм"
+      },
+      "sameAs": [
+        "https://planetum.by/"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://planetum.by/#website",
+      "url": "https://planetum.by/",
+      "name": "ПланетУм",
+      "publisher": {
+        "@id": "https://planetum.by/#childcare"
+      },
+      "inLanguage": "ru",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://planetum.by/?s={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://planetum.by/#webpage",
+      "url": "https://planetum.by/",
+      "name": "Детский развивающий центр «ПланетУм» в Лиде",
+      "isPartOf": {
+        "@id": "https://planetum.by/#website"
+      },
+      "about": {
+        "@id": "https://planetum.by/#childcare"
+      },
+      "inLanguage": "ru"
+    },
+    {
+      "@type": "ItemList",
+      "@id": "https://planetum.by/#services",
+      "name": "Услуги детского развивающего центра «ПланетУм»",
+      "itemListOrder": "https://schema.org/ItemListOrderAscending",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Развивающие занятия",
+          "url": "https://planetum.by/#services"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Подготовка к школе",
+          "url": "https://planetum.by/#services"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Творчество и мастер-классы",
+          "url": "https://planetum.by/#services"
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "name": "Кружки и дополнительные занятия",
+          "url": "https://planetum.by/#services"
+        }
+      ]
+    }
+  ]
+}
+</script>
 
-          {
-            "@type": "WebSite",
-            "@id": "https://planetum.by/#website",
-            "url": "https://planetum.by",
-            "name": "Planetum",
-            "publisher": { "@id": "https:///planetum.by/#childcare" },
-            "inLanguage": "ru"
-          },
-          {
-            "@type": "WebPage",
-            "@id": "https://planetum.by/#webpage",
-            "url": "https://planetum.by/",
-            "name": "Planetum — детский развивающий центр в Лиде",
-            "isPartOf": { "@id": "https://planetum.by/#website" },
-            "about": { "@id": "https://planetum.by/#childcare" },
-            "inLanguage": "ru"
-          }
-        ]
-        }}
-    </script>
   </head>
 
   <body>
@@ -747,13 +792,13 @@
       <!--======== Service Section ========-->
       <section id="service" class="service-section bg-smoke-two space-double">
         <div class="container">
-          <div
-            class="title-area text-center wow fadeInUp"
-            data-wow-delay="0.1s"
-          >
-            <span class="sub-title">Путь в мир знаний</span>
-            <h2 class="sec-title">Занимательные программы</h2>
-          </div>
+<div
+  class="title-area text-center animate__animated animate__fadeInUp"
+  style="animation-delay: 0.1s;"
+>
+  <span class="sub-title">Путь в мир знаний</span>
+  <h2 class="sec-title">Занимательные программы</h2>
+</div>
           <div class="row gx-lg-15 justify-content-center">
             <div class="col-xl-2 col-md-6 wow fadeInLeft" data-wow-delay="0.1s">
               <div
