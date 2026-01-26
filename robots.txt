@@ -1,0 +1,12 @@
+User-agent: *
+Allow: /
+
+# Запрещаем служебную страницу ошибки
+Disallow: /error.html
+
+# Если есть папки админки/служебные — добавишь сюда
+# Disallow: /admin/
+# Disallow: /tmp/
+
+Sitemap: https://planetum.by/sitemap.xml
+Host: planetum.by

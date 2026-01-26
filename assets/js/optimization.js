@@ -569,6 +569,120 @@
   })();
 
 
+
+
+   // ==================================================
+  // Cookie Consent: Planetum banner
+  // ==================================================
+  function initPlanetumCookieBanner() {
+    const banner = document.getElementById("planetumCookie");
+    const btnAccept = document.getElementById("planetumCookieAccept");
+    const btnDecline = document.getElementById("planetumCookieDecline");
+    const btnClose = document.getElementById("planetumCookieClose");
+
+    // Если баннера нет на странице — ничего не делаем
+    if (!banner || !btnAccept || !btnDecline || !btnClose) return;
+
+    const COOKIE_NAME = "cookie_consent";
+    const COOKIE_DAYS = 180;
+
+    function setCookie(name, value, days) {
+      const date = new Date();
+      date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
+
+      const expires = "expires=" + date.toUTCString();
+      const secure = location.protocol === "https:" ? "; Secure" : "";
+
+      document.cookie =
+        name +
+        "=" +
+        encodeURIComponent(value) +
+        "; " +
+        expires +
+        "; path=/" +
+        "; SameSite=Lax" +
+        secure;
+    }
+
+    function getCookie(name) {
+      const cookies = document.cookie ? document.cookie.split("; ") : [];
+      for (let i = 0; i < cookies.length; i++) {
+        const parts = cookies[i].split("=");
+        const key = parts.shift();
+        const val = parts.join("=");
+        if (key === name) return decodeURIComponent(val);
+      }
+      return null;
+    }
+
+    function showBanner() {
+      banner.classList.add("is-show");
+    }
+
+    function hideBanner() {
+      banner.classList.remove("is-show");
+    }
+
+    // ✅ Подключай аналитику только после "accepted"
+    function enableAnalytics() {
+      // Пример:
+      // loadYandexMetrika();
+      // loadGA4();
+    }
+
+    function disableAnalytics() {
+      // Если аналитику НЕ вставляешь в <head>, то обычно тут ничего не надо.
+    }
+
+    function initConsent() {
+      const consent = getCookie(COOKIE_NAME);
+
+      if (consent === "accepted") {
+        enableAnalytics();
+        return;
+      }
+
+      if (consent === "declined") {
+        disableAnalytics();
+        return;
+      }
+
+      showBanner();
+
+      // лёгкий UX: фокус на кнопку "Принять"
+      setTimeout(() => btnAccept.focus(), 150);
+    }
+
+    let locked = false;
+
+    btnAccept.addEventListener("click", function () {
+      if (locked) return;
+      locked = true;
+
+      setCookie(COOKIE_NAME, "accepted", COOKIE_DAYS);
+      enableAnalytics();
+      hideBanner();
+    });
+
+    btnDecline.addEventListener("click", function () {
+      if (locked) return;
+      locked = true;
+
+      setCookie(COOKIE_NAME, "declined", COOKIE_DAYS);
+      disableAnalytics();
+      hideBanner();
+    });
+
+    btnClose.addEventListener("click", function () {
+      hideBanner();
+    });
+
+    initConsent();
+  }
+
+
+
+
   // ==================================================
   // Boot
   // ==================================================
@@ -578,6 +692,7 @@
     initMenuSystem();
     initWaveButtons();
     initLightbox();
+    initPlanetumCookieBanner();
     initSmoothScroll();
     initStickyHeader();
     initPremiumHeroParallax();
