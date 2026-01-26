@@ -3511,10 +3511,10 @@ ul.popular-service-wrap li:hover {
 .header-top-area.v4 .container {
   max-width: 1250px;
 }
-.header-top-area.v4 .header-social ul li {
+.header-top-area.v4 .header-links-social ul li {
   margin-right: 10px;
 }
-.header-top-area.v4 .header-social ul li a {
+.header-top-area.v4 .header-links-social ul li a {
   background-color: var(--white-color);
   width: 36px;
   height: 36px;
@@ -3523,7 +3523,7 @@ ul.popular-service-wrap li:hover {
   text-align: center;
   color: var(--theme-color);
 }
-.header-top-area.v4 .header-social ul li a:hover {
+.header-top-area.v4 .header-links-social ul li a:hover {
   background-color: var(--secondary-color);
   color: var(--white-color);
 }
@@ -3918,23 +3918,23 @@ ul.popular-service-wrap li:hover {
   color: var(--theme-color);
 }
 
-.header-social ul {
+.header-links-social ul {
   margin: 0;
   padding: 0;
   list-style-type: none;
 }
-.header-social li {
+.header-links-social li {
   display: inline-block;
   margin: 0 20px 0 0;
 }
-.header-social li:last-child {
+.header-links-social li:last-child {
   margin-right: 0;
 }
-.header-social a {
+.header-links-social a {
   display: block;
   color: var(--white-color);
 }
-.header-social a:hover {
+.header-links-social a:hover {
   color: var(--secondary-color);
 }
 
@@ -9169,7 +9169,7 @@ ul.popular-service-wrap li:hover {
 .header-layout1 .main-menu > ul > li > a:hover {
   color: var(--secondary-color);
 }
-.header-layout1 .header-social {
+.header-layout1 .header-links-social {
   padding-bottom: 0;
 }
 .header-layout1 .header-logo {
