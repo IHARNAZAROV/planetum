@@ -1,12 +1,14 @@
 User-agent: *
 Allow: /
 
-# Запрещаем служебную страницу ошибки
+# Закрываем служебную страницу ошибки
 Disallow: /error.html
 
-# Если есть папки админки/служебные — добавишь сюда
-# Disallow: /admin/
-# Disallow: /tmp/
-
+# Карта сайта
 Sitemap: https://planetum.by/sitemap.xml
+
+# Главное зеркало (важно для Яндекса)
 Host: planetum.by
+
+# Ограничение частоты обхода (актуально для Яндекса)
+Crawl-delay: 1
