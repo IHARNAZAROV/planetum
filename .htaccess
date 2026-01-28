@@ -1,51 +1,99 @@
-# =========================================
+# =================================================
 # .htaccess — planetum.by
-# Static site / Apache / cPanel
-# =========================================
+# SEO + SPEED + SECURITY
+# Google & Yandex friendly
+# =================================================
 
-# --- Charset ---
+# -------------------------------------------------
+# BASIC
+# -------------------------------------------------
 AddDefaultCharset UTF-8
-
-# --- Disable directory listing ---
 Options -Indexes
 
-# =========================================
-# MIME TYPES (CRITICAL FOR FAVICON & SEO)
-# =========================================
+# -------------------------------------------------
+# MIME TYPES (FAVICON / IMAGES / PWA)
+# -------------------------------------------------
 <IfModule mod_mime.c>
   AddType image/x-icon .ico
   AddType image/png .png
   AddType image/svg+xml .svg
   AddType application/manifest+json .webmanifest
+  AddType font/woff2 .woff2
+  AddType font/woff .woff
 </IfModule>
 
-# =========================================
+# -------------------------------------------------
 # ENABLE REWRITE
-# =========================================
+# -------------------------------------------------
 RewriteEngine On
 
-# =========================================
-# FORCE HTTPS (SAFE, WITHOUT REDIRECT LOOPS)
-# =========================================
+# -------------------------------------------------
+# CANONICAL DOMAIN (HTTPS + NON-WWW, ONE RULE)
+# -------------------------------------------------
+RewriteCond %{HTTP_HOST} !^planetum\.by$ [NC,OR]
 RewriteCond %{HTTPS} !=on
-RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+RewriteRule ^(.*)$ https://planetum.by/$1 [L,R=301]
 
-# =========================================
+# -------------------------------------------------
 # REMOVE index.html FROM URL
-# =========================================
+# -------------------------------------------------
 RewriteCond %{THE_REQUEST} \s/+(.*/)?index\.html[\s?] [NC]
-RewriteRule ^(.*/)?index\.html$ https://%{HTTP_HOST}/$1 [R=301,L]
+RewriteRule ^(.*/)?index\.html$ https://planetum.by/$1 [R=301,L]
 
-# =========================================
-# TRAILING SLASH FIX (ONLY FOR DIRECTORIES)
-# =========================================
+# -------------------------------------------------
+# TRAILING SLASH FOR DIRECTORIES ONLY
+# -------------------------------------------------
 RewriteCond %{REQUEST_FILENAME} -d
 RewriteCond %{REQUEST_URI} !/$
-RewriteRule ^(.+)$ https://%{HTTP_HOST}/$1/ [R=301,L]
+RewriteRule ^(.+)$ https://planetum.by/$1/ [R=301,L]
 
-# =========================================
-# SECURITY HEADERS (SAFE FOR STATIC SITE)
-# =========================================
+# =================================================
+# 🚀 SPEED OPTIMIZATION
+# =================================================
+
+# -------------------------------------------------
+# GZIP COMPRESSION (SAFE FOR SEO & BOTS)
+# -------------------------------------------------
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html
+  AddOutputFilterByType DEFLATE text/plain
+  AddOutputFilterByType DEFLATE text/css
+  AddOutputFilterByType DEFLATE application/javascript
+  AddOutputFilterByType DEFLATE application/json
+  AddOutputFilterByType DEFLATE application/xml
+  AddOutputFilterByType DEFLATE text/xml
+  AddOutputFilterByType DEFLATE image/svg+xml
+  AddOutputFilterByType DEFLATE font/woff
+  AddOutputFilterByType DEFLATE font/woff2
+
+  # Avoid double compression
+  SetEnvIfNoCase Request_URI \.(?:gif|jpe?g|png|ico|webp|avif|mp4|pdf)$ no-gzip
+</IfModule>
+
+# -------------------------------------------------
+# BROWSER CACHING (CRITICAL FOR SPEED)
+# -------------------------------------------------
+<IfModule mod_expires.c>
+  ExpiresActive On
+
+  # Images & icons
+  ExpiresByType image/x-icon "access plus 30 days"
+  ExpiresByType image/png "access plus 30 days"
+  ExpiresByType image/svg+xml "access plus 30 days"
+  ExpiresByType image/webp "access plus 30 days"
+
+  # CSS & JS
+  ExpiresByType text/css "access plus 7 days"
+  ExpiresByType application/javascript "access plus 7 days"
+
+  # Fonts
+  ExpiresByType font/woff2 "access plus 1 year"
+  ExpiresByType font/woff "access plus 1 year"
+</IfModule>
+
+# -------------------------------------------------
+# PREVENT MIME SNIFFING (STABILITY)
+# -------------------------------------------------
 <IfModule mod_headers.c>
   Header always set X-Content-Type-Options "nosniff"
   Header always set X-Frame-Options "SAMEORIGIN"
@@ -53,21 +101,13 @@ RewriteRule ^(.+)$ https://%{HTTP_HOST}/$1/ [R=301,L]
   Header always set Referrer-Policy "strict-origin-when-cross-origin"
 </IfModule>
 
-# =========================================
-# CACHE CONTROL (FAVICON, IMAGES, CSS, JS)
-# =========================================
-<IfModule mod_expires.c>
-  ExpiresActive On
+# -------------------------------------------------
+# DISABLE ETAG (BETTER CACHE CONSISTENCY)
+# -------------------------------------------------
+FileETag None
 
-  ExpiresByType image/x-icon "access plus 30 days"
-  ExpiresByType image/png "access plus 30 days"
-  ExpiresByType image/svg+xml "access plus 30 days"
-  ExpiresByType text/css "access plus 7 days"
-  ExpiresByType application/javascript "access plus 7 days"
-</IfModule>
-
-# =========================================
-# CUSTOM ERROR PAGES (OPTIONAL)
-# =========================================
+# -------------------------------------------------
+# CUSTOM ERROR PAGES
+# -------------------------------------------------
 ErrorDocument 404 /404.html
 ErrorDocument 403 /403.html
