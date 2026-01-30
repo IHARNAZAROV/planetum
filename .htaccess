@@ -1,99 +1,90 @@
-# =================================================
-# .htaccess — planetum.by
-# SEO + SPEED + SECURITY
-# Google & Yandex friendly
-# =================================================
+# ==================================================
+# ОСНОВНЫЕ НАСТРОЙКИ
+# ==================================================
 
-# -------------------------------------------------
-# BASIC
-# -------------------------------------------------
 AddDefaultCharset UTF-8
 Options -Indexes
 
-# -------------------------------------------------
-# MIME TYPES (FAVICON / IMAGES / PWA)
-# -------------------------------------------------
-<IfModule mod_mime.c>
-  AddType image/x-icon .ico
-  AddType image/png .png
-  AddType image/svg+xml .svg
-  AddType application/manifest+json .webmanifest
-  AddType font/woff2 .woff2
-  AddType font/woff .woff
-</IfModule>
+# ==================================================
+# MIME TYPES (favicon, svg, manifest)
+# ==================================================
 
-# -------------------------------------------------
-# ENABLE REWRITE
-# -------------------------------------------------
+AddType image/x-icon .ico
+AddType image/png .png
+AddType image/svg+xml .svg
+AddType application/manifest+json .webmanifest
+
+# ==================================================
+# REWRITE ENGINE
+# ==================================================
+
 RewriteEngine On
 
-# -------------------------------------------------
-# CANONICAL DOMAIN (HTTPS + NON-WWW, ONE RULE)
-# -------------------------------------------------
-RewriteCond %{HTTP_HOST} !^planetum\.by$ [NC,OR]
-RewriteCond %{HTTPS} !=on
-RewriteRule ^(.*)$ https://planetum.by/$1 [L,R=301]
+# ==================================================
+# CANONICAL: HTTPS + DOMAIN (БЕЗ www)
+# ==================================================
 
-# -------------------------------------------------
-# REMOVE index.html FROM URL
-# -------------------------------------------------
+RewriteCond %{HTTPS} !=on [OR]
+RewriteCond %{HTTP_HOST} !^planetum\.by$ [NC]
+RewriteRule ^(.*)$ https://planetum.by/$1 [R=301,L]
+
+# ==================================================
+# УБИРАЕМ index.html (ГЛАВНАЯ ПРОБЛЕМА GSC)
+# ==================================================
+
 RewriteCond %{THE_REQUEST} \s/+(.*/)?index\.html[\s?] [NC]
 RewriteRule ^(.*/)?index\.html$ https://planetum.by/$1 [R=301,L]
 
-# -------------------------------------------------
-# TRAILING SLASH FOR DIRECTORIES ONLY
-# -------------------------------------------------
+# ==================================================
+# TRAILING SLASH ТОЛЬКО ДЛЯ РЕАЛЬНЫХ ДИРЕКТОРИЙ
+# ==================================================
+
 RewriteCond %{REQUEST_FILENAME} -d
 RewriteCond %{REQUEST_URI} !/$
 RewriteRule ^(.+)$ https://planetum.by/$1/ [R=301,L]
 
-# =================================================
-# 🚀 SPEED OPTIMIZATION
-# =================================================
+# ==================================================
+# КЭШИРОВАНИЕ (УСКОРЕНИЕ САЙТА)
+# ==================================================
 
-# -------------------------------------------------
-# GZIP COMPRESSION (SAFE FOR SEO & BOTS)
-# -------------------------------------------------
-<IfModule mod_deflate.c>
-  AddOutputFilterByType DEFLATE text/html
-  AddOutputFilterByType DEFLATE text/plain
-  AddOutputFilterByType DEFLATE text/css
-  AddOutputFilterByType DEFLATE application/javascript
-  AddOutputFilterByType DEFLATE application/json
-  AddOutputFilterByType DEFLATE application/xml
-  AddOutputFilterByType DEFLATE text/xml
-  AddOutputFilterByType DEFLATE image/svg+xml
-  AddOutputFilterByType DEFLATE font/woff
-  AddOutputFilterByType DEFLATE font/woff2
-
-  # Avoid double compression
-  SetEnvIfNoCase Request_URI \.(?:gif|jpe?g|png|ico|webp|avif|mp4|pdf)$ no-gzip
-</IfModule>
-
-# -------------------------------------------------
-# BROWSER CACHING (CRITICAL FOR SPEED)
-# -------------------------------------------------
 <IfModule mod_expires.c>
   ExpiresActive On
 
-  # Images & icons
-  ExpiresByType image/x-icon "access plus 30 days"
-  ExpiresByType image/png "access plus 30 days"
-  ExpiresByType image/svg+xml "access plus 30 days"
-  ExpiresByType image/webp "access plus 30 days"
+  ExpiresByType text/html "access plus 1 hour"
 
-  # CSS & JS
-  ExpiresByType text/css "access plus 7 days"
-  ExpiresByType application/javascript "access plus 7 days"
+  ExpiresByType text/css "access plus 30 days"
+  ExpiresByType application/javascript "access plus 30 days"
+  ExpiresByType text/javascript "access plus 30 days"
 
-  # Fonts
-  ExpiresByType font/woff2 "access plus 1 year"
-  ExpiresByType font/woff "access plus 1 year"
+  ExpiresByType image/jpg "access plus 90 days"
+  ExpiresByType image/jpeg "access plus 90 days"
+  ExpiresByType image/png "access plus 90 days"
+  ExpiresByType image/gif "access plus 90 days"
+  ExpiresByType image/svg+xml "access plus 90 days"
+  ExpiresByType image/webp "access plus 90 days"
+
+  ExpiresByType font/woff "access plus 180 days"
+  ExpiresByType font/woff2 "access plus 180 days"
 </IfModule>
 
-# -------------------------------------------------
-# PREVENT MIME SNIFFING (STABILITY)
-# -------------------------------------------------
+# ==================================================
+# GZIP СЖАТИЕ
+# ==================================================
+
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/plain
+  AddOutputFilterByType DEFLATE text/html
+  AddOutputFilterByType DEFLATE text/css
+  AddOutputFilterByType DEFLATE application/javascript
+  AddOutputFilterByType DEFLATE text/javascript
+  AddOutputFilterByType DEFLATE application/json
+  AddOutputFilterByType DEFLATE image/svg+xml
+</IfModule>
+
+# ==================================================
+# SECURITY HEADERS
+# ==================================================
+
 <IfModule mod_headers.c>
   Header always set X-Content-Type-Options "nosniff"
   Header always set X-Frame-Options "SAMEORIGIN"
@@ -101,13 +92,8 @@ RewriteRule ^(.+)$ https://planetum.by/$1/ [R=301,L]
   Header always set Referrer-Policy "strict-origin-when-cross-origin"
 </IfModule>
 
-# -------------------------------------------------
-# DISABLE ETAG (BETTER CACHE CONSISTENCY)
-# -------------------------------------------------
-FileETag None
+# ==================================================
+# 404 PAGE
+# ==================================================
 
-# -------------------------------------------------
-# CUSTOM ERROR PAGES
-# -------------------------------------------------
 ErrorDocument 404 /404.html
-ErrorDocument 403 /403.html
